@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <title>رانڨو بالدارجة الدزيرية</title>
+    <link rel="icon" href="rango.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="find the nearest islands to your location">
+    <meta name="keywords" content="island, islands, near islands, nearest islands, islands location, islands coordinates, discover islands">
+    <meta name="author" content="Fouad Nouioua">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script defer="true" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script defer="true" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script defer="true" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        @font-face {
+          font-family: Amiri-Regular;
+          src: url(Amiri-Regular.ttf);
+        }
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            background-color:#e6e6e6;
+        }
+        #video-container, #iframe-container {
+          width: 100%;
+        }
+        @media only screen and (min-width: 992px) {
+          #menu-sm-xs {
+            display: none;
+          }
+          #video-container {
+            height: 35vw;
+          }
+          #iframe-container {
+          height: 100%;
+          }
+          #trailer {
+            height: 35vw;
+          }
+        }
+        @media only screen and (min-width: 576px) and (max-width: 991px) {
+          #menu-lg {
+            display: none;
+          }
+          #video-container {
+            height: 43vw;
+          }
+          #iframe-container {
+          height: 90%;
+          }
+          #trailer {
+            height: 30vw;
+          }
+        }
+        @media only screen and (max-width: 575px) {
+          #menu-lg {
+            display: none;
+          }
+          #video-container {
+            height: 47vw;
+          }
+          #iframe-container {
+          height: 90%;
+          }
+          #trailer {
+            height: 40vw;
+          }
+        }
+        .wt-dw-lg {
+          background-color: #d9d9d9;
+          border-radius: 10%;
+          font-family: 'Amiri-Regular';
+          font-size: 20px;
+          cursor: pointer;
+        }
+        .wt-dw-lg:hover {
+          background-color: #404040;
+          color: white;
+          transition: color .3s, background-color .3s;
+        }
+        #watch-servers-lg {
+          font-family: 'Amiri-Regular';
+        }
+        #download-servers-lg {
+          display: none;
+          font-family: 'Amiri-Regular';
+        }
+        .watch-server:hover {
+          color: white;
+          background-color: #1e7b34!important;
+          cursor: pointer;
+          transition: color .3s, background-color .3s;
+        }
+        .download-server:hover {
+          color: white;
+          background-color: #0056b3!important;
+          cursor: pointer;
+          transition: color .3s, background-color .3s;
+        }
+        #trailer-intro {
+          cursor: pointer;
+          font-size: 22px;
+          color: #cccccc;
+        }
+        #trailer-intro:hover {
+          color: #f2f2f2;
+          transition: color .3s;
+        }
+    </style>
+</head>
+<body onload="showTrailer()">
+    
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" dir="rtl">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="">
+          <img src="rango.jpg" alt="logo" style="width:70px;border-radius: 40%;">
+        </a>
+        <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <h6 id="trailer-intro" class="nav-link display-6" onclick="showTrailer()">مقدّمة</h6>
+          </li>
+        </ul>        
+    </nav>
+
+    <div class="jumbotron p-4 m-0" style="background:#e6e6e6;">
+        <h4 class="display-4 text-center">رانڨو بالدارجة الدزيرية</h4>
+    </div>
+
+    <div class="row m-0" id="video-container" dir="rtl">
+        <div class="col-lg-1 col-sm-1 col-1"></div>
+        <div id="menu-lg" class="col-lg-2 p-1" style="background:#bfbfbf">
+          <div class="row m-0 p-0">
+            <div class="col-lg-6 h-20 p-1 text-center wt-dw-lg" onclick="watch()">أتفرج</div>
+            <div class="col-lg-6 h-20 p-1 text-center wt-dw-lg" onclick="download()">طلّع</div>
+          </div>
+          <div class="d-flex flex-column mt-1" id="watch-servers-lg">
+            <div class="p-2 bg-success text-center watch-server" server="https://mega.nz/embed/fYVwxbIR#SKFBxMNfbGLXsJBx_R9Du3ZcEB6d8yZlYCbNexFwZqM" onclick="setServer(this.getAttribute('server'))">سرفر ميڨا</div>
+          </div>
+          <div class="mt-1" id="download-servers-lg">
+            <div class="p-2 bg-primary text-center download-server" link="https://mega.nz/file/fYVwxbIR#SKFBxMNfbGLXsJBx_R9Du3ZcEB6d8yZlYCbNexFwZqM" onclick="openDownload(this.getAttribute('link'))">طلّع من ميڨا</div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-sm-10 col-10 p-0 m-0">
+          <div id="iframe-container" class="m-0 p-0">
+            <iframe id="iframe" src="https://mega.nz/embed/fYVwxbIR#SKFBxMNfbGLXsJBx_R9Du3ZcEB6d8yZlYCbNexFwZqM" allowfullscreen="true" style="height: 100%;width: 100%;" frameborder="0"></iframe>
+          </div>
+          <div id="menu-sm-xs" class="row m-0 p-0" style="width: 100%;height: 10%" dir="rtl">
+            <div class="col-sm-2 col-2" style="background-color: #cccccc;"></div>
+            <div class="col-sm-3 col-3 p-0 pt-1 m-0 text-center" style="background-color:#cccccc;">
+              <div class="dropup" style="width: 100%;">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="width: 100%;font-family: 'Amiri-Regular';">
+                  أتفرج
+                </button>
+                <div class="dropdown-menu" style="width: 100%;">
+                  <a class="dropdown-item" style="text-align: right;font-family: 'Amiri-Regular';cursor: pointer;" server="https://mega.nz/embed/fYVwxbIR#SKFBxMNfbGLXsJBx_R9Du3ZcEB6d8yZlYCbNexFwZqM" onclick="setServer(this.getAttribute('server'))">سرفر ميڨا</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 col-2" style="background-color:#cccccc;"></div>
+            <div class="col-sm-3 col-3 p-0 pt-1 pb-1 m-0 text-center" style="background-color:#cccccc;">
+              <div class="dropup" style="width: 100%;">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width: 100%;font-family: 'Amiri-Regular';">
+                  طلّع
+                </button>
+                <div class="dropdown-menu" style="width: 100%;">
+                  <a class="dropdown-item" style="text-align: right;font-family: 'Amiri-Regular';cursor: pointer;" link="https://mega.nz/file/fYVwxbIR#SKFBxMNfbGLXsJBx_R9Du3ZcEB6d8yZlYCbNexFwZqM" onclick="openDownload(this.getAttribute('link'))">طلّع من ميڨا</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 col-2" style="background-color:#cccccc;"></div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-1"></div>
+    </div>
+
+    <div style="height: 10vw"></div>
+
+
+    <div class="container">
+      <button id="trailer-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display: none;"></button>
+    
+      <!-- The Modal -->
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" style="margin: -1rem auto -1rem -1rem">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <iframe id="trailer" src="https://mega.nz/embed/fYVwxbIR#SKFBxMNfbGLXsJBx_R9Du3ZcEB6d8yZlYCbNexFwZqM" allowfullscreen="true" style="width: 100%;" frameborder="0"></iframe>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer" style="justify-content: left">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" style="font-family: 'Amiri-Regular'">أغلق</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+<script>
+  let list = "watch";
+
+  function switchList() {
+    if (list == "watch") {
+      document.getElementById("watch-servers-lg").classList.add("d-flex", "flex-column");
+      document.getElementById("watch-servers-lg").style.display = "flex";
+      document.getElementById("download-servers-lg").classList.remove("d-flex", "flex-column");
+      document.getElementById("download-servers-lg").style.display = "none";
+    }
+    else if (list == "download") {
+      document.getElementById("watch-servers-lg").classList.remove("d-flex", "flex-column");
+      document.getElementById("watch-servers-lg").style.display = "none";
+      document.getElementById("download-servers-lg").classList.add("d-flex", "flex-column");
+      document.getElementById("download-servers-lg").style.display = "flex";
+    }
+  }
+  function download() {
+    list = "download";
+    switchList();
+  }
+  function watch() {
+    list = "watch";
+    switchList();
+  }
+
+  function setServer(server) {
+    document.getElementById("iframe").src = server;
+    document.getElementById("iframe").location.reload;
+  }
+
+  function openDownload(link) {
+    window.open(link);
+  }
+  
+  function showTrailer() {
+    document.getElementById("trailer-btn").click();
+  }
+</script>
+
+</body>
+</html>
